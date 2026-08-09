@@ -1,23 +1,32 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>สมาชิก คนที่ 4 — CAMT Commerce</title>
-<link rel="stylesheet" href="../main.css">
+<link rel="stylesheet" href="main.css">
 </head>
 <body>
 
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="../index.html">CAMT&nbsp;Commerce</a>
-    <a class="back" href="../index.html">← กลับหน้าหลัก</a>
+    <a class="brand" href="Index.html">
+      CAMT&nbsp;Commerce
+      <span class="brand-badge">// member profile</span>
+    </a>
+    <div class="topbar-right">
+      <a class="back" href="Index.html">← กลับหน้าหลัก</a>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light mode">
+        <svg id="theme-icon" viewBox="0 0 24 24"></svg>
+        <span id="theme-text">Theme</span>
+      </button>
+    </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <div class="idx">Member 04 / DevOps & Infrastructure</div>
+    <div class="eyebrow">MEMBER 04 / DEVOPS & INFRASTRUCTURE</div>
     <h1>สมาชิก<br>คนที่ 4</h1>
     <div class="role">DevOps & Infrastructure — ดูแลโครงสร้างพื้นฐานและการดีพลอย</div>
     <p class="bio">รับผิดชอบโครงสร้างพื้นฐานบนคลาวด์ ระบบ CI/CD และการมอนิเตอร์ ทำให้ระบบพร้อมรองรับทราฟฟิกช่วงแคมเปญและกู้คืนได้รวดเร็วเมื่อเกิดปัญหา</p>
@@ -31,7 +40,12 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="sec-title"><span class="n">A</span> ทักษะ</div>
+    <div class="sec-head">
+      <div class="sec-head-left">
+        <span class="sec-num">A</span>
+        <h2 class="sec-title">ทักษะและความเชี่ยวชาญ</h2>
+      </div>
+    </div>
     <div class="skills">
       <span class="skill">Docker / Kubernetes</span>
       <span class="skill">AWS</span>
@@ -45,8 +59,13 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="sec-title"><span class="n">B</span> ผลงานที่ผ่านมา</div>
-        <div class="proj">
+    <div class="sec-head">
+      <div class="sec-head-left">
+        <span class="sec-num">B</span>
+        <h2 class="sec-title">ผลงานที่ผ่านมา</h2>
+      </div>
+    </div>
+    <div class="proj">
       <div class="py">2025</div>
       <div><div class="pt">Shopee — Autoscaling Platform</div><div class="pd">ระบบขยายเซิร์ฟเวอร์อัตโนมัติรองรับแคมเปญ 11.11</div></div>
       <div class="pc">DevOps Lead</div>
@@ -61,15 +80,57 @@
       <div><div class="pt">Central — Observability Stack</div><div class="pd">ระบบมอนิเตอร์และแจ้งเตือนครอบคลุมทุกบริการ</div></div>
       <div class="pc">SRE</div>
     </div>
-</div>
+  </div>
 </section>
 
 <footer class="foot">
   <div class="wrap">
     <small>© 2026 CAMT Commerce</small>
-    <a href="../index.html">← กลับไปดูทีมทั้งหมด</a>
+    <a href="Index.html">← กลับไปดูทีมทั้งหมด</a>
   </div>
 </footer>
+
+<script>
+// Theme Switcher Logic
+const themeToggleBtn = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const themeText = document.getElementById('theme-text');
+
+const sunSvg = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+const moonSvg = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+
+function getInitialTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) return savedTheme;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  if (theme === 'dark') {
+    themeIcon.innerHTML = sunSvg;
+    themeIcon.setAttribute('stroke', 'currentColor');
+    themeIcon.setAttribute('stroke-width', '2');
+    themeIcon.setAttribute('fill', 'none');
+    themeText.textContent = 'Light Mode';
+  } else {
+    themeIcon.innerHTML = moonSvg;
+    themeIcon.setAttribute('stroke', 'currentColor');
+    themeIcon.setAttribute('stroke-width', '2');
+    themeIcon.setAttribute('fill', 'none');
+    themeText.textContent = 'Dark Mode';
+  }
+}
+
+let currentTheme = getInitialTheme();
+applyTheme(currentTheme);
+
+themeToggleBtn.addEventListener('click', () => {
+  currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+  applyTheme(currentTheme);
+});
+</script>
 
 </body>
 </html>
