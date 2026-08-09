@@ -4,23 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>สมาชิก คนที่ 1 — CAMT Commerce</title>
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="member1.css">
 </head>
 <body>
 
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="Index.html">
-      CAMT&nbsp;Commerce
-      <span class="brand-badge">// member profile</span>
-    </a>
-    <div class="topbar-right">
-      <a class="back" href="Index.html">← กลับหน้าหลัก</a>
-      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light mode">
-        <svg id="theme-icon" viewBox="0 0 24 24"></svg>
-        <span id="theme-text">Theme</span>
-      </button>
-    </div>
+    <a class="brand" href="Index.html">CAMT&nbsp;Commerce<span>// e-commerce systems</span></a>
+    <a class="back" href="Index.html">← กลับหน้าหลัก</a>
   </div>
 </header>
 
@@ -31,14 +22,14 @@
     <div class="role">Backend Architect — วางสถาปัตยกรรมระบบและฐานข้อมูล</div>
     <p class="bio">รับผิดชอบการออกแบบระบบหลังบ้านให้รองรับผู้ใช้จำนวนมาก ดูแลตั้งแต่โครงสร้างฐานข้อมูล การออกแบบ API ไปจนถึงการปรับจูนประสิทธิภาพในช่วงแคมเปญที่มีทราฟฟิกสูง</p>
     <div class="links">
-      <a class="chip" href="#" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="chip" href="#" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="chip" href="mailto:member1@camtcommerce.dev">Email ↗</a>
+      <a class="chip" href="https://github.com/natakron-oss" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="chip" href="https://prorio-eta.vercel.app/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="chip" href="mailto:natakronmiku@gmail.com">Email ↗</a>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section reveal">
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-head-left">
@@ -57,7 +48,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section reveal">
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-head-left">
@@ -91,45 +82,16 @@
 </footer>
 
 <script>
-// Theme Switcher Logic
-const themeToggleBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-const themeText = document.getElementById('theme-text');
-
-const sunSvg = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
-const moonSvg = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
-
-function getInitialTheme() {
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) return savedTheme;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  if (theme === 'dark') {
-    themeIcon.innerHTML = sunSvg;
-    themeIcon.setAttribute('stroke', 'currentColor');
-    themeIcon.setAttribute('stroke-width', '2');
-    themeIcon.setAttribute('fill', 'none');
-    themeText.textContent = 'Light Mode';
-  } else {
-    themeIcon.innerHTML = moonSvg;
-    themeIcon.setAttribute('stroke', 'currentColor');
-    themeIcon.setAttribute('stroke-width', '2');
-    themeIcon.setAttribute('fill', 'none');
-    themeText.textContent = 'Dark Mode';
-  }
-}
-
-let currentTheme = getInitialTheme();
-applyTheme(currentTheme);
-
-themeToggleBtn.addEventListener('click', () => {
-  currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-  applyTheme(currentTheme);
-});
+const observerOptions = {threshold: 0.1, rootMargin: '0px 0px -60px 0px'};
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 </body>
