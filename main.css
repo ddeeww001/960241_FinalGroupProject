@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ==========================================================================
    Pure Cyber Purple Design System & Enterprise Aesthetics
@@ -89,13 +89,24 @@
   --agoda-bg: rgba(59, 130, 246, 0.18);
   --agoda-border: rgba(59, 130, 246, 0.35);
 
-  /* Fonts */
-  --display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --body: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
-  --mono: 'IBM Plex Mono', monospace;
+  /* Fonts - Enterprise Formal Typography System */
+  --display: 'Prompt', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --body: 'IBM Plex Sans Thai', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
 
   /* Smooth Theme Transition */
   --theme-transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Language-Specific Formal Typography Rules */
+:root[lang="th"], [lang="th"] {
+  --display: 'Prompt', 'IBM Plex Sans Thai', sans-serif;
+  --body: 'IBM Plex Sans Thai', 'Prompt', sans-serif;
+}
+
+:root[lang="en"], [lang="en"] {
+  --display: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* ==========================================================================
